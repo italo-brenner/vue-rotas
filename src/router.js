@@ -10,8 +10,13 @@ export default new VueRouter({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [
-    { path: '/contatos', component: Contatos },
-    { path: '/contatos/:id', component: ContatoDetalhes },
+    {
+      path: '/contatos',
+      component: Contatos,
+      children: [
+        { path: '/contatos/:id', component: ContatoDetalhes }
+      ]
+    },
     { path: '/', component: Home }
   ]
 })
