@@ -18,6 +18,10 @@ export default new VueRouter({
       path: '/contatos',
       component: Contatos,
       alias: ['/meus-contatos', '/lista-de-contatos'],
+      props: (route) => {
+        const busca = route.query.busca
+        return busca ? { busca } : {}
+      },
       children: [
         {
           path: ':id',
