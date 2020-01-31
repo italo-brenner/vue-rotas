@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './views/Home'
+import Erro404 from './views/Erro404'
+import Erro404Contatos from './views/contatos/Erro404Contatos'
 import Contatos from './views/contatos/Contatos'
 import ContatosHome from './views/contatos/ContatosHome'
 import ContatoDetalhes from './views/contatos/ContatoDetalhes'
@@ -26,7 +28,8 @@ export default new VueRouter({
             'contato-detalhes': ContatoDetalhes
           }
         },
-        { path: '', component: ContatosHome, name: 'contatos' }
+        { path: '', component: ContatosHome, name: 'contatos' },
+        { path: '/contatos*', component: Erro404Contatos }
       ]
     },
     { path: '/home', component: Home },
@@ -35,6 +38,7 @@ export default new VueRouter({
       redirect: to => {
         return { name : 'contatos' }
       }
-    }
+    },
+    { path: '*', component: Erro404 }
   ]
 })
