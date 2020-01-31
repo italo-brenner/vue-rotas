@@ -24,9 +24,15 @@ export default new VueRouter({
             'contato-detalhes': ContatoDetalhes
           }
         },
-        { path: '', component: ContatosHome }
+        { path: '', component: ContatosHome, name: 'contatos' }
       ]
     },
-    { path: '/', component: Home }
+    { path: '/home', component: Home },
+    {
+      path: '/',
+      redirect: to => {
+        return { name : 'contatos' }
+      }
+    }
   ]
 })
