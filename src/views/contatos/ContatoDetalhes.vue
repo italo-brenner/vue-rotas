@@ -17,6 +17,10 @@ export default {
       type: Number,
       required: true
     }
+  },
+  beforeRouteUpdate(to, from, next) {
+    console.log('beforeRouteUpdate')
+    next()
   }
 }
 </script>
