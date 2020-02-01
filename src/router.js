@@ -10,6 +10,10 @@ import ContatoEditar from './views/contatos/ContatoEditar'
 
 Vue.use(VueRouter)
 
+const extrairParametroId = route => ({
+  id: +route.params.id
+})
+
 export default new VueRouter({
   mode: 'history',
   linkActiveClass: 'active',
@@ -24,23 +28,21 @@ export default new VueRouter({
       },
       children: [
         {
-          path: ':id',
+          path: ':id(\\d+)',
           component: ContatoDetalhes,
           name: 'contato',
-          props: route => ({
-            id: +route.params.id
-          })
+          props: extrairParametroId
         },
         {
-          path: ':id/editar',
-          alias: ':id/alterar',
+          path: ':id(\\d+)/editar',
+          alias: ':id(\\d+)/alterar',
           components: {
             default: ContatoEditar,
             'contato-detalhes': ContatoDetalhes
           },
           props: {
-            default: true,
-            'contato-detalhes': true
+            default: extrairParametroId,
+            'contato-detalhes': extrairParametroId
           }
         },
         { path: '', component: ContatosHome, name: 'contatos' },
