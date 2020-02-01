@@ -27,7 +27,9 @@ export default new VueRouter({
           path: ':id',
           component: ContatoDetalhes,
           name: 'contato',
-          props: true
+          props: route => ({
+            id: +route.params.id
+          })
         },
         {
           path: ':id/editar',

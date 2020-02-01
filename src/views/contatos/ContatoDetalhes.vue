@@ -12,9 +12,11 @@
 
 <script>
 export default {
-  props: ['id'],
-  created() {
-    console.log('Parâmetros da rota: ', this.$route.params)
+  props: {
+    id: {
+      type: Number,
+      required: true
+    }
   }
 }
 </script>
