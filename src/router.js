@@ -14,7 +14,7 @@ const extrairParametroId = route => ({
   id: +route.params.id
 })
 
-export default new VueRouter({
+const router = new VueRouter({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [
@@ -59,3 +59,14 @@ export default new VueRouter({
     { path: '*', component: Erro404 }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  console.log('beforeEach')
+  next()
+})
+
+router.afterEach((to, from) => {
+  console.log('afterEach')
+})
+
+export default router
