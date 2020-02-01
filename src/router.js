@@ -36,6 +36,10 @@ const router = new VueRouter({
         {
           path: ':id(\\d+)/editar',
           alias: ':id(\\d+)/alterar',
+          beforeEnter(to, from, next) {
+            console.log('beforeEnter')
+            next()
+          },
           components: {
             default: ContatoEditar,
             'contato-detalhes': ContatoDetalhes

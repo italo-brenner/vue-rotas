@@ -12,6 +12,10 @@
 
 <script>
 export default {
-  props: ['id']
+  props: ['id'],
+  beforeRouteEnter(to, from, next) {
+    console.log('beforeRouteEnter')
+    next()
+  }
 }
 </script>
