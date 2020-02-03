@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './views/Home'
+import Login from './views/login/Login'
 import Erro404 from './views/Erro404'
 import Erro404Contatos from './views/contatos/Erro404Contatos'
 import Contatos from './views/contatos/Contatos'
 import ContatosHome from './views/contatos/ContatosHome'
 import ContatoDetalhes from './views/contatos/ContatoDetalhes'
 import ContatoEditar from './views/contatos/ContatoEditar'
+
+import EventBus from './event-bus'
 
 Vue.use(VueRouter)
 
@@ -36,6 +39,7 @@ const router = new VueRouter({
         {
           path: ':id(\\d+)/editar',
           alias: ':id(\\d+)/alterar',
+          meta: { requerAutenticacao: true },
           beforeEnter(to, from, next) {
             console.log('beforeEnter')
             next()
@@ -54,6 +58,7 @@ const router = new VueRouter({
       ]
     },
     { path: '/home', component: Home },
+    { path: '/login', component: Login },
     {
       path: '/',
       redirect: to => {
@@ -66,6 +71,18 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   console.log('beforeEach')
+  console.log('Requer Autenticacao?', to.meta.requerAutenticacao)
+  const estaAutenticado = EventBus.autenticado
+  console.log(to.matched)
+  if (to.matched.some(rota => rota.meta.requerAutenticacao)) {
+    if (! estaAutenticado) {
+      next({
+        path: '/login',
+        query: { redirecionar: to.fullPath }
+      })
+      return
+    }
+  }
   next()
 })
 
