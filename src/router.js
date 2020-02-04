@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from './views/Home'
 import Login from './views/login/Login'
 import Erro404 from './views/Erro404'
 import Erro404Contatos from './views/contatos/Erro404Contatos'
-import Contatos from './views/contatos/Contatos'
-import ContatosHome from './views/contatos/ContatosHome'
-import ContatoDetalhes from './views/contatos/ContatoDetalhes'
-import ContatoEditar from './views/contatos/ContatoEditar'
+
+
+const Home = () => import('./views/Home')
+const Contatos = () => import(/* webpackChunkName: "contato" */ './views/contatos/Contatos')
+const ContatosHome = () => import(/* webpackChunkName: "contato" */ './views/contatos/ContatosHome')
+const ContatoDetalhes = () => import(/* webpackChunkName: "contato" */ './views/contatos/ContatoDetalhes')
+const ContatoEditar = () => import(/* webpackChunkName: "contato" */ './views/contatos/ContatoEditar')
 
 import EventBus from './event-bus'
 
